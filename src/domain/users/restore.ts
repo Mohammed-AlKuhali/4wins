@@ -9,7 +9,7 @@ export async function restoreSoftDeletedUser(userId: string, email: string): Pro
 export async function findSoftDeletedBySub(appleSub?: string, googleSub?: string) {
   if (!appleSub && !googleSub) return null;
 
-  const conditions = [];
+  const conditions: ReturnType<typeof eq>[] = [];
   if (appleSub) conditions.push(eq(users.appleSub, appleSub));
   if (googleSub) conditions.push(eq(users.googleSub, googleSub));
 

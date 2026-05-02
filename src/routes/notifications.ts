@@ -5,8 +5,9 @@ import { db } from "../lib/db.js";
 import { pushTokens } from "../db/schema/push_tokens.js";
 import { requireAuth } from "../middleware/require_auth.js";
 import { validate } from "../middleware/validate.js";
+import type { AppEnv } from "../lib/app_env.js";
 
-const notifs = new Hono();
+const notifs = new Hono<AppEnv>();
 notifs.use("*", requireAuth);
 
 const registerSchema = z.object({

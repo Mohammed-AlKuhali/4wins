@@ -34,8 +34,9 @@ export function initSentry(): void {
 }
 
 function scrubBreadcrumbs(event: Sentry.Event): void {
-  if (!event.breadcrumbs?.values) return;
-  for (const crumb of event.breadcrumbs.values) {
+  const breadcrumbValues = (event.breadcrumbs as { values?: Sentry.Breadcrumb[] } | undefined)?.values;
+  if (!breadcrumbValues) return;
+  for (const crumb of breadcrumbValues) {
     if (crumb.data) {
       delete (crumb.data as Record<string, unknown>)?.body;
       delete (crumb.data as Record<string, unknown>)?.request_body;

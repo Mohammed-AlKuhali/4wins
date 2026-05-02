@@ -4,8 +4,9 @@ import { db } from "../lib/db.js";
 import { insights } from "../db/schema/insights.js";
 import { users } from "../db/schema/users.js";
 import { requireAuth } from "../middleware/require_auth.js";
+import type { AppEnv } from "../lib/app_env.js";
 
-const insightsRouter = new Hono();
+const insightsRouter = new Hono<AppEnv>();
 insightsRouter.use("*", requireAuth);
 
 insightsRouter.get("/", async (c) => {

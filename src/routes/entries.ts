@@ -9,8 +9,9 @@ import { deleteEntry } from "../domain/entries/delete.js";
 import { createEntrySchema, updateEntrySchema, validateCreateEntry } from "../domain/entries/validate.js";
 import { getIdempotentResponse, storeIdempotentResponse } from "../lib/idempotency.js";
 import { shapeEntry } from "./today.js";
+import type { AppEnv } from "../lib/app_env.js";
 
-const entriesRouter = new Hono();
+const entriesRouter = new Hono<AppEnv>();
 
 entriesRouter.use("*", requireAuth, writeLimiter);
 

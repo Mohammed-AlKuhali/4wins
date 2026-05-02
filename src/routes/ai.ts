@@ -3,8 +3,9 @@ import { z } from "zod";
 import { requireAuth } from "../middleware/require_auth.js";
 import { validate } from "../middleware/validate.js";
 import { tagPillar } from "../domain/ai/tag_pillar.js";
+import type { AppEnv } from "../lib/app_env.js";
 
-const ai = new Hono();
+const ai = new Hono<AppEnv>();
 
 ai.use("*", requireAuth);
 

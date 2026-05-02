@@ -9,7 +9,7 @@ const internalCron = new Hono();
 internalCron.post("/cron", async (c) => {
   const secret = c.req.header("X-Cron-Secret");
   if (!env.CRON_SECRET || secret !== env.CRON_SECRET) {
-    throwApiError("UNAUTHORIZED", "Invalid cron secret", 401);
+    throwApiError("AUTH_REQUIRED", "Invalid cron secret", 401);
   }
 
   logger.info("Cron tick started");

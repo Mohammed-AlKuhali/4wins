@@ -11,6 +11,7 @@ import { shapeUser } from "../domain/users/shape_user.js";
 import { updateUserSchema } from "../domain/users/validate_update.js";
 import { softDeleteUser } from "../domain/users/soft_delete.js";
 import { hardDeleteUser } from "../domain/users/hard_delete.js";
+import type { AppEnv } from "../lib/app_env.js";
 
 const CUE_TIME_DEFAULTS: Record<string, string> = {
   morning: "07:30:00",
@@ -19,7 +20,7 @@ const CUE_TIME_DEFAULTS: Record<string, string> = {
   before_bed: "22:00:00",
 };
 
-const me = new Hono();
+const me = new Hono<AppEnv>();
 
 me.use("*", requireAuth);
 

@@ -12,8 +12,9 @@ import { validate } from "../middleware/validate.js";
 import { requireAuth } from "../middleware/require_auth.js";
 import { throwApiError } from "../lib/errors.js";
 import { env } from "../lib/env.js";
+import type { AppEnv } from "../lib/app_env.js";
 
-const auth = new Hono();
+const auth = new Hono<AppEnv>();
 
 const appleSchema = z.object({
   id_token: z.string().min(1),

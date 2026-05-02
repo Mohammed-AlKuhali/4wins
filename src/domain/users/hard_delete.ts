@@ -28,7 +28,7 @@ export async function hardDeleteLapsedAccounts(): Promise<number> {
   );
 
   let deleted = 0;
-  for (const row of rows as { id: string }[]) {
+  for (const row of (rows as unknown) as { id: string }[]) {
     await hardDeleteUser(row.id);
     deleted++;
   }

@@ -5,8 +5,9 @@ import { entries } from "../db/schema/entries.js";
 import { streaks } from "../db/schema/streaks.js";
 import { requireAuth } from "../middleware/require_auth.js";
 import { ensureToday } from "../domain/days/ensure_today.js";
+import type { AppEnv } from "../lib/app_env.js";
 
-const today = new Hono();
+const today = new Hono<AppEnv>();
 
 today.use("*", requireAuth);
 

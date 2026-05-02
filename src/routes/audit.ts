@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { requireAuth } from '../middleware/require_auth.js';
 import { writeLimiter } from '../middleware/rate_limit.js';
 import { appendAuditEvent } from '../domain/audit/append.js';
+import type { AppEnv } from '../lib/app_env.js';
 
 const ALLOWED_KEYS = new Set([
   'screen', 'locale', 'mode', 'pillar', 'input_method',
@@ -22,7 +23,7 @@ const auditBodySchema = z.object({
   metadata: z.record(z.union([z.string(), z.number()])).optional().default({}),
 });
 
-export const auditRouter = new Hono();
+export const auditRouter = new Hono<AppEnv>();
 
 auditRouter.post('/', requireAuth, writeLimiter, async (c) => {
   const userId = c.get('userId') as string;

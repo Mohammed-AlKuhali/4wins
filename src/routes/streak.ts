@@ -5,8 +5,9 @@ import { streaks } from "../db/schema/streaks.js";
 import { days } from "../db/schema/days.js";
 import { requireAuth } from "../middleware/require_auth.js";
 import { recomputeStreak } from "../domain/streaks/recompute.js";
+import type { AppEnv } from "../lib/app_env.js";
 
-const streak = new Hono();
+const streak = new Hono<AppEnv>();
 
 streak.use("*", requireAuth);
 

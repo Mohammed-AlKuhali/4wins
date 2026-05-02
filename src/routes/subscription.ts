@@ -8,8 +8,9 @@ import { validate } from "../middleware/validate.js";
 import { startTrial } from "../domain/subscription/start_trial.js";
 import { redeemApple } from "../domain/subscription/redeem_apple.js";
 import { redeemGoogle } from "../domain/subscription/redeem_google.js";
+import type { AppEnv } from "../lib/app_env.js";
 
-const sub = new Hono();
+const sub = new Hono<AppEnv>();
 sub.use("*", requireAuth);
 
 sub.post("/start_trial", async (c) => {
