@@ -9,14 +9,17 @@
     "test": "vitest run",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx src/db/migrate.ts",
-    "db:reset": "tsx src/db/reset.ts"
+    "db:reset": "tsx src/db/reset.ts",
+    "cron:tick": "tsx -e \"import('./src/cron/runner.js').then(m => m.runCron()).then(r => { console.log(r); process.exit(0); })\""
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.92.0",
     "@hono/node-server": "^1.13.0",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.0",
     "hono": "^4.6.0",
     "jose": "^6.2.3",
+    "openai": "^6.35.0",
     "pino": "^10.3.1",
     "postgres": "^3.4.5",
     "zod": "^3.23.8"

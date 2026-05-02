@@ -1,7 +1,7 @@
 import { db } from "../../lib/db.js";
 import { entries } from "../../db/schema/entries.js";
 import { auditEvents } from "../../db/schema/audit_events.js";
-import { tagPillar } from "./ai_tag_stub.js";
+import { tagPillar } from "../ai/tag_pillar.js";
 import { recomputeDayState } from "../days/recompute_day_state.js";
 import { recomputeStreak } from "../streaks/recompute.js";
 import type { CreateEntryInput } from "./validate.js";

@@ -29,6 +29,10 @@ export { rateLimits } from "./rate_limits.js";
 
 export { idempotencyKeys } from "./idempotency_keys.js";
 
+export { jobsRunLog } from "./jobs_run_log.js";
+export { pushQueue } from "./push_queue.js";
+export { iapReceipts } from "./iap_receipts.js";
+
 export {
   usersRelations,
   daysRelations,

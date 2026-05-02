@@ -10,6 +10,7 @@ import { throwApiError } from "../lib/errors.js";
 import { shapeUser } from "../domain/users/shape_user.js";
 import { updateUserSchema } from "../domain/users/validate_update.js";
 import { softDeleteUser } from "../domain/users/soft_delete.js";
+import { hardDeleteUser } from "../domain/users/hard_delete.js";
 
 const CUE_TIME_DEFAULTS: Record<string, string> = {
   morning: "07:30:00",
@@ -90,7 +91,12 @@ me.patch("/", writeLimiter, validate(updateUserSchema), async (c) => {
 me.delete("/", async (c) => {
   const userId = c.get("userId") as string;
   await getActiveUser(userId);
-  await softDeleteUser(userId);
+  const immediate = c.req.query("immediate") === "true";
+  if (immediate) {
+    await hardDeleteUser(userId);
+  } else {
+    await softDeleteUser(userId);
+  }
   return c.body(null, 204);
 });
 

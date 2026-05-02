@@ -16,6 +16,8 @@ const envSchema = z.object({
   EXPO_ACCESS_TOKEN: z.string().optional(),
   APP_STORE_SHARED_SECRET: z.string().optional(),
   GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: z.string().optional(),
+  CRON_SECRET: z.string().optional(),
+  PUSH_DISABLED: z.string().optional(),
 });
 
 const parsed = envSchema.safeParse(process.env);
