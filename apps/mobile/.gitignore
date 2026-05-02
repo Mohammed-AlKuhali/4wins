@@ -1,0 +1,17 @@
+node_modules/
+.expo/
+dist/
+web-build/
+.env.local
+.env.*.local
+google-play-key.json
+google-services.json
+GoogleService-Info.plist
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+ios/
+android/

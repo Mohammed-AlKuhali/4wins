@@ -1,5 +1,4 @@
 import * as Notifications from 'expo-notifications';
-import * as Device from 'expo-application';
 import { Platform } from 'react-native';
 import { apiJson } from './api';
 

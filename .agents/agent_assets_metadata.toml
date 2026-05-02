@@ -1,0 +1,26 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "a9Oog07xWkWzdLfE12JYD"
+uri = "file://apps/mobile/assets/icons/icon.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "wniHHSvwDJ0HJ5LLAxWD9"
+uri = "file://apps/mobile/assets/icons/notification-icon.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "9YmZbRWjwJf8P4Xa41DZa"
+uri = "file://apps/mobile/assets/icons/splash-icon.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Ee-7IA1cAEeNKBFQ6va5F"
+uri = "file://apps/mobile/assets/icons/adaptive-icon-foreground.png"
+type = "image"
+title = "generated_image"
