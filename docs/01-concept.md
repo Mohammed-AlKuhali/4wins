@@ -45,25 +45,25 @@ The Financial pillar in particular is the differentiator. Wellness apps avoid mo
 
 ---
 
-## Daily ritual (to be specified by the user)
+## Daily ritual — locked
 
-Open. The framework requires a ritual but the *shape* of the daily commitment isn't locked yet:
+**Output-boxed. No time required.** One win logged per pillar per day. Length and duration are user-controlled. Timers may exist as an *optional* tool but are never enforced.
 
-- **Time-boxed?** (e.g. 15/45/15/15 minutes per pillar)
-- **Output-boxed?** (e.g. log one win per pillar, length flexible)
-- **Free-form?** (user defines their own daily rules)
+Rationale: the v0 (time-required, didn't retain) confirms what habit research already says — friction kills daily apps. The win is the *log*, not the *minutes*. A 30-second voice note that captures a Spiritual reflection is a complete win. So is a 60-minute workout. The system rewards consistency, not heroics.
 
-Recommended for v1: **output-boxed with optional timers.** One win per pillar per day. Timers available but not required. Lower friction = better adherence.
-
-Decision needed from user before PRD.
+Implications baked in from this decision:
+- **No "you only did 12 of 15 minutes" guilt.** Either the win is logged or it isn't.
+- **One-tap completion** must exist for every pillar (the lazy path).
+- **Voice-first capture** is the primary input mode for Mental, Spiritual, and Financial pillars; HealthKit/auto-import for Physical.
+- **Streaks count days with all four pillars logged**, not minutes accumulated.
 
 ---
 
-## What the live `4wins.me` does today
+## Status of the live `4wins.me`
 
-> Public sources describe the live app as an "AI Diet, Exercise & To-Do Coach" with voice input. To verify what's actually deployed (vs. marketing copy) we'll need a walkthrough or repo access — currently the live site is blocked from the build sandbox. **The user has confirmed they own the domain.**
+The live site is a **prior build done in Lovable** that **did not retain users**. It is being treated as a discarded **v0** — useful only for lessons learned, not as a foundation. The mobile app we're scoping is a fresh **v1 greenfield build**, not a port.
 
-Open question: is the live site's three-bucket framing ("Diet, Exercise, To-Do") your current build, or marketing positioning that hides the four-pillar model behind a more conventional fitness-app face? This affects whether v2 is a **repositioning** (same engine, fix the surface) or a **rebuild** (new engine, full four pillars).
+**The v0 failure to retain is itself a research input.** The Phase 2 retention research (in flight) needs to be cross-referenced against whatever we can recover from the v0 (analytics, drop-off points, user feedback, copy that didn't land). If the user has access to the v0 codebase, GA / Plausible / Posthog data, or notes on why it failed, that's gold. Without it, we work from first principles + the retention literature.
 
 ---
 
