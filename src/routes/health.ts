@@ -2,11 +2,11 @@ import { Hono } from "hono";
 import { sql } from "drizzle-orm";
 import { db } from "../lib/db.js";
 import { env } from "../lib/env.js";
+import { GIT_SHA } from "../lib/version.js";
 
 const health = new Hono();
 
 const SERVER_START = Date.now();
-const GIT_SHA = process.env.GIT_SHA ?? "unknown";
 
 type HealthStatus = "ok" | "degraded";
 

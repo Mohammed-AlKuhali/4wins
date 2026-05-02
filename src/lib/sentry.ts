@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node';
+import { GIT_SHA } from './version.js';
 
 const SENTRY_DSN = process.env.SENTRY_DSN_BACKEND;
-const GIT_SHA = process.env.GIT_SHA ?? 'unknown';
 
 export function initSentry(): void {
   if (!SENTRY_DSN) return;
