@@ -3,7 +3,9 @@ import { z } from "zod";
 const envSchema = z.object({
   DATABASE_URL: z.string().min(1),
   JWT_SECRET: z.string().min(1),
-  PORT: z.coerce.number().default(8787),
+  PORT: z.coerce.number().default(8080),
+  LOG_LEVEL: z.string().default("info"),
+  APPLE_BUNDLE_ID: z.string().optional(),
   APPLE_TEAM_ID: z.string().optional(),
   APPLE_KEY_ID: z.string().optional(),
   APPLE_PRIVATE_KEY: z.string().optional(),
