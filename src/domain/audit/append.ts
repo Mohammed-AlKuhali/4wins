@@ -9,7 +9,7 @@ export async function appendAuditEvent(
   await db.insert(auditEvents).values({
     id: crypto.randomUUID(),
     userId,
-    eventType,
+    event: eventType,
     metadata,
   });
 }
