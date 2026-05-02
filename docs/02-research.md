@@ -52,8 +52,8 @@ These are decisions I'm proposing as locked based on the research. Push back on 
 
 | # | Decision | Why |
 |---|---|---|
-| 16 | **Lock Screen widget is primary surface, not the app.** iOS 17+ interactive widgets let users tap to complete from lock screen. The app is configuration. | Streaks app pattern. "Log-in-and-leave" is the entire premise. |
-| 17 | **Apple Watch complication on day 1 of public launch.** Four-arc ring on the watch face. | This is the canonical 4Wins object. No watch = no moat. |
+| 16 | **Standard home-screen widget primary in v1.** Interactive Lock Screen widget (iOS 17+) deferred to v1.5 — requires Swift via Expo Modules API, not worth blocking v1 launch on. | Streaks app pattern. "Log-in-and-leave" is the entire premise. The Quad-of-the-day widget covers 80% of the surface value. |
+| 17 | **Apple Watch complication deferred to v1.5.** Add when retention data shows the at-a-glance use case is real. | Same Swift/Expo Modules constraint as #16. Not a moat we can validate before launch. |
 | 18 | **Weekly close, not just daily.** 7-segment week visualization that closes on Sunday. Multiplies closure events without inflating effort. Natural fresh-start landmark every Monday. | Dai/Milkman/Riis 2014 — fresh-start effect drives reactivation. |
 
 ### Pricing
@@ -85,25 +85,24 @@ These are tempting but the research says don't.
 
 ---
 
-## The three biggest open strategic decisions
+## The two remaining open strategic decisions
 
-These I cannot decide for you.
+Stack is now locked (Replit + Expo, see section A below). These two I cannot decide for you.
 
-### A. Stack — and the Replit tension
+### A. Stack — Replit + Expo (locked, with one v1.5 caveat)
 
-The user wants to build with Replit. But the moat features (Lock Screen widget, Watch complication, HealthKit, on-device AI tagging) are **iOS-native**. Replit doesn't ship native iOS apps natively.
+**Decision: Replit Agent + Expo + React Native for the full app, iOS + Android together.** Replit's "Text-to-TestFlight" flow handles build/sign/submit. Standard home-screen widget (the Quad of the day) is included. HealthKit/Health Connect via Expo health modules. Voice capture + AI tagging + auth + paywall + all four pillars build end-to-end inside Replit.
 
-**Three honest paths:**
+**The one caveat — pushed to v1.5:**
 
-| Path | Pros | Cons |
-|---|---|---|
-| **A1. Replit-hosted PWA + Capacitor wrapper** | Fast, single codebase, Replit Agent works | Loses native widgets/watch — kills the moat. The product becomes a worse Streaks. |
-| **A2. Replit for backend (Node/Postgres/auth/AI), native iOS in Xcode** | Keeps the moat; backend stays in Replit's environment; AI prompt/test loop on Replit is great | Requires Mac + Xcode for client; two-stack project; slower iteration |
-| **A3. Native iOS first (Xcode + Cursor/Claude), Replit later for marketing site** | Fastest path to App Store with the actual moat features | Doesn't use Replit for the app itself — defeats the user's stated preference |
+| Feature | Why deferred |
+|---|---|
+| **Interactive Lock Screen widget (iOS 17+)** | Requires Swift via Expo Modules API. Doable, but adds native-build complexity not worth blocking v1 launch on. The standard home-screen widget covers 80% of the surface value. |
+| **Apple Watch complication** | Same — Swift via Expo Modules. Add when retention data shows the at-a-glance use case is real. |
 
-**My recommendation: A2.** Replit hosts the API + Postgres + auth + the AI tagging endpoint. Xcode + Cursor for the SwiftUI client. This keeps the user's Replit-centric workflow for everything *except* the surfaces that physically can't be PWAs (watch complication, lock screen widget, HealthKit).
+This means **Decision #17** (Watch complication on day 1 of public launch) moves to **v1.5**, and **Decision #16** (Lock Screen as primary surface) downgrades to **standard widget primary in v1, interactive widget in v1.5**. Everything else in this doc stands.
 
-Decide before Phase 4 (PRD).
+Net: cross-platform iOS + Android from day 1, single Replit workflow, faster iteration. Native Swift modules added later without rewriting the app.
 
 ### B. Audience — where do v1 users come from?
 
