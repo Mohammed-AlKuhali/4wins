@@ -1,53 +1,49 @@
-# Phase 6 — Driving Replit Agent against the imported repo
+# Phase 6 — Replit Agent runs autonomously
 
-> The repo is imported into Replit. Agent has direct access to every file under `docs/`. So we drive it against the tickets directly — no wrappers, no inlining.
+> Goal: zero per-ticket pasting. The user starts a session, Agent works.
 
 ---
 
-## The workflow
+## How it works
 
-1. **Import the repo into Replit** (one-time).
-2. **For each ticket**, paste the matching one-line command from `commands.md` into Replit Agent.
-3. Agent reads the ticket file + the brand bible + the PRD, implements, and self-verifies against the acceptance criteria.
-4. Review the diff. Merge if it passes. Tell me what was friction so the next ticket's command can be tighter.
+The autonomous orchestration lives at the repo root in `.replit-agent-context.md`. That file tells Replit Agent:
 
-That's the entire phase.
+1. Read all relevant docs (`docs/tickets/README.md`, brand bible, PRD).
+2. Pick the next un-merged ticket per the dependency graph.
+3. Implement it. Self-verify. Commit.
+4. Move to the next ticket. Repeat.
+5. Stop only when blocked or at a sprint boundary.
 
-## Files
+So the user's interaction model is:
+
+- **Start of build:** open Replit Agent, type *anything* (even "begin"), Agent starts at T-001 and runs.
+- **Sprint boundaries:** Agent posts a summary, then continues. User can interrupt to redirect.
+- **Blockers:** Agent asks one focused question. User answers. Agent resumes.
+
+That's it. No 38 commands to paste.
+
+---
+
+## Files in this directory
 
 | File | Purpose |
 |---|---|
-| `commands.md` | One-line "paste-into-Replit-Agent" command per ticket, in dependency order. **Start here.** |
-| `_template.md` | Fallback wrapper for tickets where Agent gets stuck and needs everything inlined. Rarely needed once the repo is imported. |
-| `T-001.md` | The first inlined prompt (kept as a reference / safety net if `commands.md` doesn't work for some reason). |
+| `README.md` | This explanation. |
+| `_template.md` | Inlined-prompt wrapper template. **Fallback only** — used if the imported-repo workflow fails for a specific ticket and Agent needs everything pasted. Should rarely be needed. |
+| `T-001.md` | A worked example of the wrapper template, kept as a safety net for the very first ticket if needed. |
 
-## Why this is better than 38 wrapped prompts
-
-- **Less duplication.** Each ticket already references the brand bible §X and PRD §Y. Imported repo means those references resolve. Wrappers were band-aids for an access problem you don't have.
-- **Smaller pastes.** A one-line command vs. a 200-line wrapped prompt. Less room for accidental edits.
-- **Single source of truth.** When the brand bible changes (which it will), every ticket inherits — no 38 wrappers to update.
-- **The repo IS the prompt corpus.** Including this README. Including `commands.md`. Including the rejection list. Agent can grep it.
-
-## When to fall back to a wrapper
-
-If Agent ignores a ticket's references, fabricates context, or skips reading linked docs — fall back to `_template.md` for that one ticket. Inline what's needed. Keep going.
-
-Once the workflow is proven, this fallback becomes vestigial.
+The previous `commands.md` (per-ticket paste-able commands) was removed — it's now redundant since `.replit-agent-context.md` orchestrates autonomously.
 
 ---
 
-## Before you start the first build
+## If autonomous mode misbehaves
 
-Add a `.replit-agent-context.md` (or whatever Replit Agent's preferred convention is) at the repo root that tells Agent:
+| Symptom | Action |
+|---|---|
+| Agent doesn't read `.replit-agent-context.md` on its own | Tell it once: "Read `.replit-agent-context.md` and follow it." This is a one-time correction per session. |
+| Agent stops after one ticket and waits | Tell it: "Continue the loop." Agent should resume. If the agent harness has a hard stop after each tool batch, that's a Replit limitation, not a doc problem — pin it on the user-facing summary so they know why. |
+| Agent silently substitutes the stack (e.g. uses Express) | Push back: "The stack constraint is binding. Re-do the ticket with Hono." Update the context file's stack section with whatever specific framing finally lands. |
+| Agent skips acceptance criteria | The context file already requires explicit walk-through. If skipped, push back. If chronic, hoist the requirement higher in `.replit-agent-context.md`. |
+| Agent injects banned items (purple gradients, "✨", etc.) | Run the rejection-list grep, paste the offending lines back to Agent, ask for fix. Each occurrence is a signal that the rejection list needs to be even more prominent. |
 
-> Before implementing any ticket, read:
-> 1. `docs/tickets/README.md` (build conventions + dependency graph)
-> 2. `docs/03-brand.md §9` (the rejection list — applies to all code)
-> 3. The specific ticket file, e.g. `docs/tickets/backend/T-001-replit-setup.md`
-> 4. Any `Implements PRD: §X.Y` sections referenced in the ticket header.
->
-> Self-verify against the ticket's acceptance criteria before claiming completion. Run the tests.
-
-This is the only "wrapper" that ever needs to exist — applied once at repo level, not per-prompt.
-
-I'll write that file next if you confirm the path.
+Track friction in `docs/learnings.md` as you go — feeds back into refinements.
