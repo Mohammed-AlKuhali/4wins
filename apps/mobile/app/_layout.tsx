@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Stack } from 'expo-router';
+import { Stack, usePathname } from 'expo-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '../theme';
 import { useAppFonts } from '../lib/fonts';
@@ -9,6 +9,8 @@ import { clearTokens } from '../lib/auth_state';
 import { router } from 'expo-router';
 import type { AppearanceOverride } from '../theme/ThemeProvider';
 import * as SecureStore from 'expo-secure-store';
+import { initSentry } from '../lib/sentry';
+import { track } from '../lib/telemetry';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,8 +22,13 @@ export default function RootLayout() {
   const [fontsLoaded] = useAppFonts();
   const [i18nReady, setI18nReady] = useState(false);
   const [appearanceOverride, setAppearanceOverride] = useState<AppearanceOverride>('auto');
+  const pathname = usePathname();
 
   useEffect(() => {
+    initSentry(
+      process.env.EXPO_PUBLIC_SENTRY_DSN ?? '',
+      process.env.EXPO_PUBLIC_APP_VERSION,
+    );
     initI18n().then(() => setI18nReady(true));
     SecureStore.getItemAsync('appearanceOverride').then((v) => {
       if (v === 'dark' || v === 'light' || v === 'auto') setAppearanceOverride(v as AppearanceOverride);
@@ -31,6 +38,11 @@ export default function RootLayout() {
       router.replace('/(onboarding)/welcome');
     });
   }, []);
+
+  useEffect(() => {
+    if (!pathname) return;
+    track('screen_view', { screen: pathname });
+  }, [pathname]);
 
   if (!fontsLoaded || !i18nReady) return null;
 

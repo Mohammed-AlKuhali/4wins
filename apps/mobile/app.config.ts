@@ -68,6 +68,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ['expo-apple-authentication'],
     'expo-av',
     'expo-localization',
+    [
+      '@sentry/react-native/expo',
+      {
+        organization: process.env.SENTRY_ORG ?? '',
+        project: process.env.SENTRY_PROJECT ?? '',
+        url: 'https://sentry.io/',
+      },
+    ],
   ],
   experiments: {
     typedRoutes: true,

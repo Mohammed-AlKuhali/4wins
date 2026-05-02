@@ -9,6 +9,7 @@ import { sendEveningCuePushJob } from "./jobs/send_evening_cue_push.js";
 import { generateDay30InsightsJob } from "./jobs/generate_day_30_insights.js";
 import { refreshMonthlyFreezesJob } from "./jobs/refresh_monthly_freezes.js";
 import { sendTrialEndingBannerJob } from "./jobs/send_trial_ending_banner.js";
+import { cleanupAuditEventsJob } from "./jobs/cleanup_audit_events.js";
 import type { User } from "../db/schema/users.js";
 
 type JobFn = (user: User, now: Date) => Promise<void>;
@@ -39,11 +40,21 @@ async function runForUser(user: User, now: Date): Promise<void> {
   }
 }
 
+async function runSystemJobs(): Promise<void> {
+  try {
+    await cleanupAuditEventsJob();
+  } catch (err) {
+    logger.error({ err: String(err) }, "System job cleanup_audit_events failed");
+  }
+}
+
 export async function runCron(): Promise<{ processed: number; duration_ms: number }> {
   const start = Date.now();
   const now = new Date();
   let processed = 0;
   let offset = 0;
+
+  await runSystemJobs();
 
   const globalTimeout = setTimeout(() => {
     logger.warn("Cron runner hit 4-minute hard timeout");

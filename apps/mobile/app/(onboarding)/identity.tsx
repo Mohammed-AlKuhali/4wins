@@ -56,6 +56,8 @@ export default function IdentityScreen() {
           numberOfLines={3}
           maxLength={MAX_CHARS}
           autoFocus
+          accessibilityLabel="Identity statement"
+          accessibilityHint="Describe who you are becoming"
         />
         {text.length > WARN_CHARS && (
           <Text variant="caption" color={colors.textSecondary} style={styles.charCount}>

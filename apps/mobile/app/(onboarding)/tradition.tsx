@@ -79,6 +79,8 @@ export default function TraditionScreen() {
               value={customText}
               onChangeText={setCustomText}
               autoFocus
+              accessibilityLabel="Custom tradition name"
+              accessibilityHint="Enter a name for your own spiritual tradition"
             />
             <Pressable
               style={[styles.option, { backgroundColor: colors.text, marginTop: 12 }]}

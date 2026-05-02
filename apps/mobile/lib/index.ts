@@ -10,3 +10,4 @@ export { SPIRITUAL_PROMPTS, getSpiritualPrompt } from './spiritual_prompts';
 export { useReduceMotion } from './reduce_motion';
 export { registerPushToken } from './push_register';
 export { syncWidgetState } from './widget_sync';
+export { initSentry, setSentryUser, clearSentryUser, captureException } from './sentry';

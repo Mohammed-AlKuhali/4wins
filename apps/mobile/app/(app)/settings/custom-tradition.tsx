@@ -32,6 +32,8 @@ export default function CustomTraditionScreen() {
         placeholder="Name your practice..."
         placeholderTextColor={colors.textTertiary}
         autoFocus
+        accessibilityLabel="Custom tradition name"
+        accessibilityHint="Enter a name for your spiritual practice"
       />
       <Pressable
         style={[styles.cta, { backgroundColor: text.trim() ? colors.text : colors.surface }]}

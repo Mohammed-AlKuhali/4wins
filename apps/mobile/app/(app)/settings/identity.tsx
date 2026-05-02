@@ -33,6 +33,8 @@ export default function IdentitySettingsScreen() {
         placeholder="I am someone who..."
         placeholderTextColor={colors.textTertiary}
         autoFocus
+        accessibilityLabel="Identity statement"
+        accessibilityHint="Describe who you are becoming"
       />
       <Pressable
         style={[styles.cta, { backgroundColor: text.length >= 10 ? colors.text : colors.surface }]}
