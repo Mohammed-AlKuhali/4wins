@@ -5,6 +5,9 @@ import { env } from "../lib/env.js";
 
 const health = new Hono();
 
+const SERVER_START = Date.now();
+const GIT_SHA = process.env.GIT_SHA ?? "unknown";
+
 type HealthStatus = "ok" | "degraded";
 
 interface HealthCache {
@@ -55,7 +58,14 @@ async function checkAi(): Promise<HealthStatus> {
 health.get("/", async (c) => {
   const [dbStatus, aiStatus] = await Promise.all([checkDb(), checkAi()]);
   const status: HealthStatus = dbStatus === "ok" && aiStatus === "ok" ? "ok" : "degraded";
-  return c.json({ status, db: dbStatus, ai: aiStatus });
+  const uptimeSeconds = Math.floor((Date.now() - SERVER_START) / 1000);
+  return c.json({
+    status,
+    db: dbStatus,
+    ai: aiStatus,
+    git_sha: GIT_SHA,
+    uptime_seconds: uptimeSeconds,
+  });
 });
 
 export default health;
