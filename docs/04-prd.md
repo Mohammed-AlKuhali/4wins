@@ -705,10 +705,12 @@ Phase 6 then converts each ticket into a Replit prompt that can be pasted direct
 
 ---
 
-## Open questions for the user before Phase 5
+## Resolved decisions (locked 2026-05-02)
 
-1. **Who builds the four pillar glyphs?** Designer in your network, freelance via Mobbin/Dribbble, or Claude generates SVGs in Phase 5? My take: SVG-from-spec in Phase 5 as v0, designer pass before TestFlight.
-2. **Apple Sign-In + Google Sign-In only, or also email+password?** Apple/Google only is faster, more private, fewer support tickets. My take: Apple + Google only.
-3. **STT provider:** OpenAI Whisper API (server), iOS native SFSpeechRecognizer (client), or both with fallback? My take: server-side Whisper for cross-platform consistency + multi-language; iOS native is a v1.5 perf optimization.
-4. **AI tagging model:** Claude Haiku 4.5 vs GPT-4o-mini? My take: Claude Haiku 4.5 — cheaper, faster, better at structured output, and aligned with our latest model recommendation.
-5. **Audience plan** — still open from Phase 2. Where do v1 users come from? This drives whether we need a "share my Quad" object in v1 or not.
+User confirmed "go with your takes" — recommendations are now binding decisions:
+
+1. **Pillar glyphs** — Claude generates SVGs from the section 6 specs as v0 in Phase 5; designer pass before public launch. Sufficient for TestFlight.
+2. **Auth** — Apple Sign-In + Google Sign-In only. No email+password. Fewer support tickets, better privacy posture, faster build.
+3. **Speech-to-text** — Server-side OpenAI Whisper API. Cross-platform consistency, 50+ languages out of the box (critical for Ahmad persona's Arabic). iOS-native SFSpeechRecognizer as a v1.5 perf optimization.
+4. **AI tagging model** — Claude Haiku 4.5 (`claude-haiku-4-5-20251001`). Fast, cheap, strong structured-output behavior.
+5. **Audience plan** — deferred. Doesn't block Phase 5 (tickets) or Phase 6 (Replit prompts). Will be addressed in a separate `docs/05-launch.md` post-build, alongside marketing-site work. The PRD's existing "share my week" object spec stays in v1 since founder-content is the most likely default channel.
