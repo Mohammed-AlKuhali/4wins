@@ -13,6 +13,7 @@ import subRouter from "./routes/subscription.js";
 import webhooksRouter from "./routes/webhooks.js";
 import notificationsRouter from "./routes/notifications.js";
 import internalCronRouter from "./routes/internal_cron.js";
+import { auditRouter } from "./routes/audit.js";
 import { errorHandler } from "./middleware/error_handler.js";
 import { requestLog } from "./middleware/request_log.js";
 import { authLimiter } from "./middleware/rate_limit.js";
@@ -42,6 +43,7 @@ app.route("/v1/subscription", subRouter);
 app.route("/v1/webhooks", webhooksRouter);
 app.route("/v1/notifications", notificationsRouter);
 app.route("/v1/internal", internalCronRouter);
+app.route("/v1/audit", auditRouter);
 
 app.notFound((c) => {
   throwApiError("NOT_FOUND", "Route not found", 404);

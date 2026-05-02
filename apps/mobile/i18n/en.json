@@ -1,0 +1,81 @@
+{
+  "onboarding": {
+    "welcome_title": "Discipline isn't motivation.\nIt's a decision you make once,\nand keep making.",
+    "pillars_title": "Four wins. Every day.\nMental. Financial. Spiritual. Physical.\nTomorrow, all four again.",
+    "tradition_prompt": "Your Spiritual win can draw from a tradition,\nor from your own thinking. You can change this anytime.",
+    "tradition_options": {
+      "christian": "Christian",
+      "stoic": "Stoic",
+      "buddhist": "Buddhist",
+      "secular": "Secular",
+      "custom": "Custom"
+    },
+    "identity_prompt": "Who are you becoming?",
+    "cue_prompt": "When will you do this?",
+    "cue_options": {
+      "morning_coffee": "After my morning coffee",
+      "before_laptop": "Before my laptop",
+      "close_laptop": "When I close my laptop",
+      "before_bed": "Before bed",
+      "custom": "Custom"
+    },
+    "notifications_prompt": "We send one push a day, anchored to your cue.\nWe never send \"don't break your streak.\"",
+    "notifications_options": {
+      "once": "Allow, once a day",
+      "twice": "Allow, twice a day max",
+      "none": "No notifications"
+    },
+    "first_close": "You closed your first Quad."
+  },
+  "home": {
+    "good_morning": "Good morning.",
+    "today_open": "Today's Quad is open.",
+    "one_left": "One left.",
+    "closed": "Closed.",
+    "tomorrow_opens": "Tomorrow opens fresh.",
+    "today_is_new": "Today is a new day.",
+    "yesterday_rest": "Yesterday was a rest day.",
+    "next": "Next: {{pillar}}"
+  },
+  "pillars": {
+    "mental": "Mental",
+    "financial": "Financial",
+    "spiritual": "Spiritual",
+    "physical": "Physical"
+  },
+  "capture": {
+    "mental_prompt": "What did you learn today?",
+    "financial_prompt": "Did your money behavior today\nmatch the person you're becoming?",
+    "financial_yes": "Yes",
+    "financial_not_quite": "Not quite",
+    "financial_not_today": "Not today",
+    "physical_moved": "You moved today. Logged.",
+    "physical_prompt": "Move your body. One minute counts.",
+    "spiritual": {
+      "stoic": "What's in your control today,\nand what isn't?",
+      "christian": "What are you grateful to God for today?",
+      "buddhist": "What did you notice without attaching to it?",
+      "secular": "What matters today\nbeyond what's urgent?"
+    },
+    "type_instead": "Type instead",
+    "lazy_path": "Log a tiny {{pillar}} win"
+  },
+  "errors": {
+    "network": "We can't reach the server.\nYour day is saved on this phone.",
+    "voice_failed": "We didn't catch that.",
+    "auth_failed": "Try that again. We'll wait."
+  },
+  "weekly": {
+    "closed": "The week closed.",
+    "days_complete": "{{count}} of 7 days complete.",
+    "cumulative": "Cumulative",
+    "days_complete_label": "days complete"
+  },
+  "paywall": {
+    "first_month": "This is your first month.",
+    "look_like": "Here's what 30 days of you\nlooks like.",
+    "next_eleven": "The next eleven months are paid.\n$79 a year. No card needed\nfor the trial.",
+    "start_trial": "Start 14-day trial",
+    "continue_free": "Continue free, 30-day history"
+  }
+}

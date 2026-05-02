@@ -1,0 +1,81 @@
+{
+  "onboarding": {
+    "welcome_title": "La disciplina no es motivación.\nEs una decisión que tomas una vez,\ny sigues tomando.",
+    "pillars_title": "Cuatro victorias. Cada día.\nMental. Financiero. Espiritual. Físico.\nMañana, los cuatro de nuevo.",
+    "tradition_prompt": "Tu victoria espiritual puede venir de una tradición,\no de tu propio pensamiento. Puedes cambiar esto en cualquier momento.",
+    "tradition_options": {
+      "christian": "Cristiano",
+      "stoic": "Estoico",
+      "buddhist": "Budista",
+      "secular": "Secular",
+      "custom": "Personalizado"
+    },
+    "identity_prompt": "¿En quién te estás convirtiendo?",
+    "cue_prompt": "¿Cuándo harás esto?",
+    "cue_options": {
+      "morning_coffee": "Después de mi café de la mañana",
+      "before_laptop": "Antes de mi portátil",
+      "close_laptop": "Cuando cierro mi portátil",
+      "before_bed": "Antes de dormir",
+      "custom": "Personalizado"
+    },
+    "notifications_prompt": "Enviamos un push al día, anclado a tu señal.\nNunca enviamos \"no rompas tu racha\".",
+    "notifications_options": {
+      "once": "Permitir, una vez al día",
+      "twice": "Permitir, máximo dos veces al día",
+      "none": "Sin notificaciones"
+    },
+    "first_close": "Cerraste tu primer Quad."
+  },
+  "home": {
+    "good_morning": "Buenos días.",
+    "today_open": "El Quad de hoy está abierto.",
+    "one_left": "Uno más.",
+    "closed": "Cerrado.",
+    "tomorrow_opens": "Mañana comienza de nuevo.",
+    "today_is_new": "Hoy es un día nuevo.",
+    "yesterday_rest": "Ayer fue un día de descanso.",
+    "next": "Siguiente: {{pillar}}"
+  },
+  "pillars": {
+    "mental": "Mental",
+    "financial": "Financiero",
+    "spiritual": "Espiritual",
+    "physical": "Físico"
+  },
+  "capture": {
+    "mental_prompt": "¿Qué aprendiste hoy?",
+    "financial_prompt": "¿Tu comportamiento financiero hoy\ncoincide con la persona en la que te estás convirtiendo?",
+    "financial_yes": "Sí",
+    "financial_not_quite": "No del todo",
+    "financial_not_today": "Hoy no",
+    "physical_moved": "Te moviste hoy. Registrado.",
+    "physical_prompt": "Mueve tu cuerpo. Un minuto cuenta.",
+    "spiritual": {
+      "stoic": "¿Qué está en tu control hoy,\ny qué no lo está?",
+      "christian": "¿Por qué le estás agradecido a Dios hoy?",
+      "buddhist": "¿Qué notaste sin apegarte a ello?",
+      "secular": "¿Qué importa hoy\nmás allá de lo urgente?"
+    },
+    "type_instead": "Escribir en su lugar",
+    "lazy_path": "Registra una pequeña victoria en {{pillar}}"
+  },
+  "errors": {
+    "network": "No podemos llegar al servidor.\nTu día está guardado en este teléfono.",
+    "voice_failed": "No lo captamos.",
+    "auth_failed": "Inténtalo de nuevo. Te esperamos."
+  },
+  "weekly": {
+    "closed": "La semana cerró.",
+    "days_complete": "{{count}} de 7 días completos.",
+    "cumulative": "Acumulado",
+    "days_complete_label": "días completos"
+  },
+  "paywall": {
+    "first_month": "Este es tu primer mes.",
+    "look_like": "Así es como se ven 30 días tuyos.",
+    "next_eleven": "Los próximos once meses son de pago.\n$79 al año. No necesitas tarjeta para la prueba.",
+    "start_trial": "Comenzar prueba de 14 días",
+    "continue_free": "Continuar gratis, historial de 30 días"
+  }
+}
