@@ -1,36 +1,53 @@
-# Phase 6 — Replit Agent Prompts
+# Phase 6 — Driving Replit Agent against the imported repo
 
-> Each prompt here is a **single copy-pasteable block** for Replit Agent. Pick one, copy the entire file body (between the `---PROMPT START---` / `---PROMPT END---` markers), paste into Replit Agent.
+> The repo is imported into Replit. Agent has direct access to every file under `docs/`. So we drive it against the tickets directly — no wrappers, no inlining.
 
-## Status
+---
 
-This phase is being built **iteratively**, not in one batch. Reason: writing 38 prompt wrappers without empirical signal from Replit Agent would be guessing. The first prompt (`T-001.md`) is production-ready; subsequent prompts will be authored after we observe how T-001 behaves and refine the wrapper accordingly.
+## The workflow
 
-## How a prompt is built
+1. **Import the repo into Replit** (one-time).
+2. **For each ticket**, paste the matching one-line command from `commands.md` into Replit Agent.
+3. Agent reads the ticket file + the brand bible + the PRD, implements, and self-verifies against the acceptance criteria.
+4. Review the diff. Merge if it passes. Tell me what was friction so the next ticket's command can be tighter.
 
-Each prompt = **wrapper** + **ticket body**. The wrapper inlines:
-
-1. Project context (what 4Wins is, the stack, the conventions)
-2. Brand bible §9 rejection list (relevant items, even for backend tickets — naming, copy)
-3. Relevant PRD sections excerpted
-4. The ticket body verbatim
-5. A "before completing" postamble (verify acceptance criteria, run rejection list)
-
-So Replit Agent has everything in one input, no doc-tree navigation required.
+That's the entire phase.
 
 ## Files
 
-| File | Status |
+| File | Purpose |
 |---|---|
-| `_template.md` | The wrapper template. Boilerplate for new prompts. |
-| `T-001.md` | ✅ Ready — start here. |
-| `T-002.md` ... `T-055.md` | Authored after T-001 lands; each one ~15 min of refinement. |
+| `commands.md` | One-line "paste-into-Replit-Agent" command per ticket, in dependency order. **Start here.** |
+| `_template.md` | Fallback wrapper for tickets where Agent gets stuck and needs everything inlined. Rarely needed once the repo is imported. |
+| `T-001.md` | The first inlined prompt (kept as a reference / safety net if `commands.md` doesn't work for some reason). |
 
-## How to use
+## Why this is better than 38 wrapped prompts
 
-1. Open the prompt file (e.g. `T-001.md`).
-2. Copy everything between `---PROMPT START---` and `---PROMPT END---`.
-3. Paste into Replit Agent input.
-4. Review the agent's output against the acceptance criteria + rejection list.
-5. Merge / iterate.
-6. Tell the human (Claude) what was friction so the wrapper template can be refined for the next prompts.
+- **Less duplication.** Each ticket already references the brand bible §X and PRD §Y. Imported repo means those references resolve. Wrappers were band-aids for an access problem you don't have.
+- **Smaller pastes.** A one-line command vs. a 200-line wrapped prompt. Less room for accidental edits.
+- **Single source of truth.** When the brand bible changes (which it will), every ticket inherits — no 38 wrappers to update.
+- **The repo IS the prompt corpus.** Including this README. Including `commands.md`. Including the rejection list. Agent can grep it.
+
+## When to fall back to a wrapper
+
+If Agent ignores a ticket's references, fabricates context, or skips reading linked docs — fall back to `_template.md` for that one ticket. Inline what's needed. Keep going.
+
+Once the workflow is proven, this fallback becomes vestigial.
+
+---
+
+## Before you start the first build
+
+Add a `.replit-agent-context.md` (or whatever Replit Agent's preferred convention is) at the repo root that tells Agent:
+
+> Before implementing any ticket, read:
+> 1. `docs/tickets/README.md` (build conventions + dependency graph)
+> 2. `docs/03-brand.md §9` (the rejection list — applies to all code)
+> 3. The specific ticket file, e.g. `docs/tickets/backend/T-001-replit-setup.md`
+> 4. Any `Implements PRD: §X.Y` sections referenced in the ticket header.
+>
+> Self-verify against the ticket's acceptance criteria before claiming completion. Run the tests.
+
+This is the only "wrapper" that ever needs to exist — applied once at repo level, not per-prompt.
+
+I'll write that file next if you confirm the path.
