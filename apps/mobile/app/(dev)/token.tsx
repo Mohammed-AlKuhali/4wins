@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Pressable, Alert } from 'react-native';
+import { View, StyleSheet, Pressable, Alert, Share } from 'react-native';
 import { Text } from '../../components/Text';
 import { getAccessToken, getRefreshToken } from '../../lib/auth_state';
 import { useTheme } from '../../theme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Clipboard from 'expo-clipboard';
 
 export default function DevTokenScreen() {
   const { colors } = useTheme();
@@ -18,9 +17,15 @@ export default function DevTokenScreen() {
   }, []);
 
   async function copyToken(t: string | null) {
-    if (!t) return;
-    await Clipboard.setStringAsync(t);
-    Alert.alert('Copied!', t.slice(0, 30) + '...');
+    if (!t) {
+      Alert.alert('No token', 'Not signed in yet.');
+      return;
+    }
+    try {
+      await Share.share({ message: t });
+    } catch {
+      Alert.alert('Token', t.slice(0, 60) + '…');
+    }
   }
 
   if (!__DEV__) return null;

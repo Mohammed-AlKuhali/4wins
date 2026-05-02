@@ -1,10 +1,11 @@
 import { describe, it, expect, beforeAll } from "vitest";
-import { db } from "../lib/db.js";
 import { createTestJwt } from "./helpers/auth.js";
 
 const BASE = "http://localhost:8080";
 
-describe("POST /v1/audit", () => {
+const INTEGRATION = process.env.INTEGRATION === "1";
+
+describe.skipIf(!INTEGRATION)("POST /v1/audit (integration)", () => {
   let token: string;
 
   beforeAll(async () => {

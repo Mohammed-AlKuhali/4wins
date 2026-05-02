@@ -1,7 +1,10 @@
 import "dotenv/config";
 import { serve } from "@hono/node-server";
 import { env } from "./lib/env.js";
+import { initSentry } from "./lib/sentry.js";
 import app from "./app.js";
+
+initSentry();
 
 serve(
   {
